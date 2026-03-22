@@ -1,0 +1,31 @@
+{
+  "name": "parabank-playwright-tests",
+  "version": "1.0.0",
+  "description": "Professional end-to-end test framework for ParaBank OpenAccount page using Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:specific": "playwright test tests/e2e/openAccount.spec.js",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen https://parabank.parasoft.com/parabank/openaccount.htm"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e",
+    "automation",
+    "parabank"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0"
+  }
+}
