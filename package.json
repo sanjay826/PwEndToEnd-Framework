@@ -1,31 +1,37 @@
 {
   "name": "parabank-playwright-tests",
   "version": "1.0.0",
-  "description": "Professional end-to-end test framework for ParaBank OpenAccount page using Playwright",
+  "description": "Production-grade TypeScript Playwright End-to-End Test Framework for ParaBank",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:ui": "playwright test --ui",
+    "test:login": "playwright test tests/e2e/login.spec.ts",
+    "test:account": "playwright test tests/e2e/openAccount.spec.ts",
     "test:chromium": "playwright test --project=chromium",
     "test:firefox": "playwright test --project=firefox",
     "test:webkit": "playwright test --project=webkit",
-    "test:specific": "playwright test tests/e2e/openAccount.spec.js",
     "report": "playwright show-report",
-    "codegen": "playwright codegen https://parabank.parasoft.com/parabank/openaccount.htm"
+    "typecheck": "tsc --noEmit",
+    "codegen": "playwright codegen https://parabank.parasoft.com/parabank/index.htm"
   },
   "keywords": [
     "playwright",
+    "typescript",
     "testing",
     "e2e",
     "automation",
-    "parabank"
+    "parabank",
+    "page-object-model"
   ],
-  "author": "",
+  "author": "sanjay826",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
-    "@types/node": "^25.5.0"
+    "@types/node": "^25.5.0",
+    "dotenv": "^17.3.1",
+    "typescript": "^6.0.3"
   }
 }

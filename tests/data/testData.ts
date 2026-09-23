@@ -1,11 +1,41 @@
-/**
- * Test Data Constants
- * Centralized test data for all test cases
- */
+import { EnvConfig } from '../utils/envConfig';
 
-const testData = {
-  baseUrl: 'https://parabank.parasoft.com',
+export interface LoginCredentials {
+  username: string;
+  password: string;
+  invalidUsername: string;
+  invalidPassword: string;
+}
+
+export interface AccountScenario {
+  name: string;
+  accountType: 'CHECKING' | 'SAVINGS';
+  fundingAccount: string;
+  expectedOutcome: 'success' | 'error';
+}
+
+export interface InvalidScenario {
+  name: string;
+  accountType: 'CHECKING' | 'SAVINGS' | null;
+  fundingAccount: string | null;
+  expectedOutcome: 'error';
+  expectedError: string;
+}
+
+export const testData = {
+  baseUrl: EnvConfig.baseUrl,
   openAccountPage: '/parabank/openaccount.htm',
+  loginPage: '/parabank/index.htm',
+
+  /**
+   * Login credentials configured via environment variables or default fallbacks
+   */
+  loginCredentials: {
+    username: process.env.TEST_USER || 'sky',
+    password: process.env.TEST_PASSWORD || 'sky01',
+    invalidUsername: 'invaliduser',
+    invalidPassword: 'wrongpass',
+  } as LoginCredentials,
 
   /**
    * Valid test scenarios for account opening
@@ -14,7 +44,7 @@ const testData = {
     {
       name: 'Create Checking Account',
       accountType: 'CHECKING',
-      fundingAccount: '11111', // Typical ParaBank demo account ID
+      fundingAccount: '11111',
       expectedOutcome: 'success',
     },
     {
@@ -23,13 +53,7 @@ const testData = {
       fundingAccount: '11111',
       expectedOutcome: 'success',
     },
-    {
-      name: 'Create Money Market Account',
-      accountType: 'MONEY_MARKET',
-      fundingAccount: '11111',
-      expectedOutcome: 'success',
-    },
-  ],
+  ] as AccountScenario[],
 
   /**
    * Invalid test scenarios for negative testing
@@ -49,7 +73,7 @@ const testData = {
       expectedOutcome: 'error',
       expectedError: 'Please select a funding account',
     },
-  ],
+  ] as InvalidScenario[],
 
   /**
    * Expected success message patterns
@@ -69,23 +93,21 @@ const testData = {
   },
 
   /**
-   * Common account types
+   * Account types available in ParaBank
    */
   accountTypes: {
     CHECKING: 'CHECKING',
     SAVINGS: 'SAVINGS',
-    MONEY_MARKET: 'MONEY_MARKET',
   },
 
   /**
-   * Timeout values (in ms)
+   * Standard timeouts
    */
   timeouts: {
     short: 3000,
     medium: 5000,
     long: 10000,
-    pageLoadWait: 5000,
   },
 };
 
-module.exports = testData;
+export default testData;
