@@ -1,5 +1,8 @@
 import { test, expect } from '../fixtures/baseFixture';
+import { authStatePath } from '../globalSetup';
 import { logStep } from '../utils/testHelpers';
+
+test.use({ storageState: authStatePath });
 
 test.describe('ParaBank Open Account Suite', () => {
   test.beforeEach(async ({ openAccountPage }) => {
@@ -75,7 +78,7 @@ test.describe('ParaBank Open Account Suite', () => {
     const response = await page.goto(`${openAccountPage.baseUrl}/parabank/openaccount.htm`, {
       waitUntil: 'domcontentloaded',
     });
-    
+
     // ParaBank either serves the error page (HTTP 500) or redirects to login/home
     expect(response).not.toBeNull();
     logStep(`Observed direct response status: ${response?.status()}`);

@@ -40,6 +40,7 @@ Pwtest/
 - **Web-First Assertions & Auto-Waiting**: Eliminates brittle arbitrary `waitForTimeout` calls by relying on Playwright's automatic actionability and polling assertions (`expect(locator).toBeVisible()`).
 - **Resilient Configuration**: Configured in `playwright.config.ts` with parallel execution, automatic retries on CI, HTML and list reporters, and trace/screenshot/video capture on failure.
 - **Environment Driven**: Seamless multi-environment switching (`production`, `staging`, `local`) via `.env` and `dotenv`.
+- **Automatic Authentication**: Global setup registers a randomized ParaBank user, logs in, and caches Playwright `storageState` in `playwright/.auth/user.json`. Later runs reuse the state; if it expires, the saved credentials are tried once before a fresh user is registered.
 
 ---
 
@@ -69,8 +70,8 @@ Default configurations:
 - `BASE_URL=https://parabank.parasoft.com`
 - `HEADLESS=true`
 - `TIMEOUT=30000`
-- `TEST_USER=sky`
-- `TEST_PASSWORD=sky01`
+
+Authentication credentials are generated automatically during global setup. The generated username and password are stored in the ignored `playwright/.auth/user-credentials.json` file for cache recovery.
 
 ---
 

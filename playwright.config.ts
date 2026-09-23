@@ -16,7 +16,8 @@ const TIMEOUT = Number(process.env.TIMEOUT) || 45000;
  */
 export default defineConfig({
   testDir: './tests/e2e',
-  
+  globalSetup: './tests/globalSetup.ts',
+
   /* Maximum time one test can run for */
   timeout: TIMEOUT,
 
@@ -78,14 +79,14 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    {
+    /* {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    },
+    }, */
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces */

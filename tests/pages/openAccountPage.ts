@@ -1,7 +1,5 @@
 import { Locator, Page } from '@playwright/test';
 import { EnvConfig } from '../utils/envConfig';
-import { testData } from '../data/testData';
-import { LoginPage } from './loginPage';
 
 /**
  * Modern, strongly-typed Page Object Model for ParaBank Open Account Page
@@ -41,22 +39,8 @@ export class OpenAccountPage {
    * Attempts session establishment via login if required
    */
   async navigate(): Promise<void> {
-    const loginPage = new LoginPage(this.page);
-    await loginPage.navigate();
-
-    // Check if login form is present and attempt login with configured credentials
-    const isLoginVisible = await loginPage.isLoginPageDisplayed();
-    if (isLoginVisible) {
-      try {
-        await loginPage.login(testData.loginCredentials.username, testData.loginCredentials.password);
-      } catch {
-        // Continue even if login attempt fails
-      }
-    }
-
-    // Navigate to Open Account page
     const accountUrl = `${this.baseUrl}/parabank/openaccount.htm`;
-    await this.page.goto(accountUrl, { waitUntil: 'domcontentloaded' }).catch(() => {});
+    await this.page.goto(accountUrl, { waitUntil: 'domcontentloaded' }).catch(() => { });
   }
 
   /**
